@@ -10,3 +10,20 @@
 + more players
 + AI
 + highscore to file
+
+
+
+
+/ blackjack class "main"
+	game.main()
+/ game class
+	Player player1 = new Player
+	Player player2 = new Player
+	"score calculation"
+	"bust"
+	"tie"
+/ player class
+	player.name
+	player.score
+	player.hit()
+	player.stand()
