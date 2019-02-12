@@ -1,12 +1,16 @@
 public class Game {
 	public static void main (String[] args) {
 		public enum deckOfCards = 
-		Player player1 = new Player
-		Player player2 = new Player
+		Player player1 = new Player;
+		Player player2 = new Player;
+		int currentScorePlayer1 = 0;
+		int currentScorePlayer2 = 0;
+		int remainingDeck = 52;
 
-		public String nextCard() {
+		public String nextCard(int remainingDeck) {
 			/*
 			get random card from remaining deck
+			return remainingDeck-1
 			*/
 		}
 
@@ -27,15 +31,19 @@ public class Game {
 		}
 
 		public void game(player1, player2) {
-			/* 
+			/*
+		DO 
 			player1 moves --> active player
 			get move
 			count score
 			check winner
+			end turn --> reset display
 			player2 moves --> active player
 			get move
 			count score
 			check winner
+			end turn --> reset display
+		WHILE checkWinner IS FALSE 
 			*/		
 		}
 	}
