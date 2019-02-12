@@ -1,0 +1,12 @@
+# 2 players
+# colorcoded suits (red, orange, green, blue)
+# enum for deck
+# highlight active player
+# custom names for players
+
+
+
++ card design (ASCII-fication)
++ more players
++ AI
++ highscore to file
