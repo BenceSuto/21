@@ -49,6 +49,10 @@ public class Game {
 	}
 }
 
+/*
+reset display: name1, name2, remaining deck, number of cards 1, number of cards 2
+*/
+
 //import java.util.Scanner;
 //
 //public class Game {
