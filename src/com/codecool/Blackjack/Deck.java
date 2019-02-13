@@ -1,6 +1,6 @@
 import java.util.Random;
 
-enum Cards {Ace(1), Two(2), Three(3), Four(4), Five(5), Six(6), Seven(7), Eight(8), Nine(9), Ten(10), Jack(10), Queen(10), King(10);
+enum Cards {Ace(11), Two(2), Three(3), Four(4), Five(5), Six(6), Seven(7), Eight(8), Nine(9), Ten(10), Jack(10), Queen(10), King(10);
 
     public final int value;
 
@@ -34,8 +34,7 @@ public class Deck {
         Random generator = new Random();
         Cards card = cards[generator.nextInt(cards.length)];
 
-        if (card.equals(Cards.Ace)){}
-        else result = card.value;
+        result = card.value;
         System.out.println(card + " = " + result);
     }
 }
