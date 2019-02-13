@@ -7,6 +7,14 @@ enum Cards {Ace(1), Two(2), Three(3), Four(4), Five(5), Six(6), Seven(7), Eight(
     Cards (int value){
         this.value = value;
     }
+    public Cards chooseRank() {
+        Cards[] ranks = values();
+        return ranks[(int) (Math.random() * ranks.length)];
+    }
+
+    public int getValue() {
+        return value;
+    }
 }
 
 public class Deck {
@@ -20,14 +28,14 @@ public class Deck {
             cards[i++] = card;
     }
 
-    public static void main (String [] args){
+    public static Cards getCard(){
 
         int result = 0;
         Random generator = new Random();
-        Cards card =cards[generator.nextInt(cards.length)];
+        Cards card = cards[generator.nextInt(cards.length)];
 
-        if (card.equals(Cards.Ace)){;}
-        else result = card.value;
-        System.out.println(card + " = " +result);
+ 	result = card.value;
+
+	return card;
     }
 }
