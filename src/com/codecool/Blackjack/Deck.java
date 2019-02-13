@@ -28,7 +28,7 @@ public class Deck {
             cards[i++] = card;
     }
 
-    public static Cards getCard(){
+    public static void main (String [] args){
 
         int result = 0;
         Random generator = new Random();
