@@ -163,7 +163,7 @@ public class Game {
                 if (playAgain == 'y') {
                     playerScore = 0;
                     dealerScore = 0;
-                    break;
+                    continue;
                 } else {
                     System.exit(0);
                 }
@@ -173,11 +173,9 @@ public class Game {
                 continue;
             }
         }
-        if (playerMoney < 0) {
             //player has no more money
             terminal.moveTo(10, 20);
             System.out.println("Sorry, you have no more money.");
-
-        } playerMove.close();
+            playerMove.close();
     }
 }
