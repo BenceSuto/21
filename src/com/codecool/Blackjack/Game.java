@@ -1,8 +1,11 @@
 import java.util.Arrays;
 import java.util.Scanner;
+import com.codecool.termlib.*;
 
 public class Game {
     public void main() {
+
+        Terminal terminal = new Terminal();
 
         Scanner input = new Scanner(System.in);
         int playerScore = 0;
