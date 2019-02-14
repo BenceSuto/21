@@ -40,7 +40,7 @@ public class Terminal {
      * Might reset cursor position.
      */
     public void clearScreen() {
-        System.out.print("\033[H\033[2J");
+        System.out.print("\033\143");
     }
 
     /**
