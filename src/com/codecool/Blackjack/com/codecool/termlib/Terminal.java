@@ -40,6 +40,7 @@ public class Terminal {
      * Might reset cursor position.
      */
     public void clearScreen() {
+        System.out.print("\033[H\033[2J");
     }
 
     /**
@@ -52,6 +53,9 @@ public class Terminal {
      * @param y Row number.
      */
     public void moveTo(Integer x, Integer y) {
+        char escCode = 0x1B;
+        int row = x; int column = y;
+        System.out.print(String.format("%c[%d;%df",escCode,row,column));
     }
 
     /**
