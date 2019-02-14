@@ -112,7 +112,7 @@ public class Game {
                             System.out.println("It's a Push. You get back " + playerBet + " coins.");
                             playerMoney += playerBet;
                         }
-                        else if (dealerScore - 21 < playerScore - 21) {
+                        else if (21 - dealerScore < 21 - playerScore) {
                             System.out.println("Dealer won. You lost your bet.");
                         } else {
                             prize = playerBet * 2;
@@ -165,9 +165,11 @@ public class Game {
                 continue;
             }
         }
-        //player has no more money
-        terminal.moveTo(10, 20);
-        System.out.println("Sorry, you have no more money.");
-        playerMove.close();
+        if (playerMoney < 0) {
+            //player has no more money
+            terminal.moveTo(10, 20);
+            System.out.println("Sorry, you have no more money.");
+
+        } playerMove.close();
     }
 }
