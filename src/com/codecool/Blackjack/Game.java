@@ -3,6 +3,8 @@ import java.util.Scanner;
 
 import com.codecool.termlib.*;
 
+import javax.smartcardio.Card;
+
 public class Game {
     public void main() {
 
@@ -22,6 +24,8 @@ public class Game {
         player = input.nextLine();
         terminal.clearScreen();
         Deck deck = new Deck();
+        Cards[] dealerCards = new Cards[2];
+        Cards[] playerCards = new Cards[2];
 
         //game continues while player has money
         while (playerMoney > 0) {
@@ -40,8 +44,6 @@ public class Game {
                 player get cards
 		        dealer get cards
                  */
-                Cards[] dealerCards = new Cards[2];
-                Cards[] playerCards = new Cards[2];
                 for (int i = 0; i < playerCards.length; i++) {
                     playerCards[i] = deck.getCard();
                     playerScore += playerCards[i].value;
@@ -53,7 +55,7 @@ public class Game {
                 }
                 //print out cards
                 terminal.moveTo(30, 10);
-                System.out.print(player + ": " + Arrays.toString(playerCards).replace("[", "").replace("]", ""));
+                System.out.print(player + ": " + playerCards[0] + ", " + playerCards[1]);
                 terminal.moveTo(30, 90);
                 System.out.print("Dealer: " + dealerCards[0] + ", [hidden]");
                 //print out scores
@@ -64,22 +66,23 @@ public class Game {
                     prize = playerBet + (playerBet / 2);
                     terminal.moveTo(10, 10);
                     System.out.println("It's BlackJack! You won " + prize + " coins!");
+                    playerMoney += prize;
                 } else {
                     while (playerScore < 21) {
                         terminal.moveTo(20, 10);
                         System.out.println("What's your next move? ('h' for hit, 's' for stand)");
                         terminal.moveTo(21, 10);
                         char nextMove = playerMove.next().charAt(0);
-
                         terminal.clearScreen();
                         //player moves first
                         if (nextMove == 'h') {
                             Cards[] playerCardsNext = Arrays.copyOf(playerCards, playerCards.length + 1);
-                            playerCardsNext[playerCards.length] = deck.getCard();
-                            playerScore += playerCardsNext[playerCards.length].value;
+                            Cards newCard = playerCardsNext[playerCards.length] = deck.getCard();
+                            playerScore += newCard.value;
                             //print out cards
                             terminal.moveTo(30, 10);
                             System.out.println(player + ": " + Arrays.toString(playerCards).replace("[", "").replace("]", ""));
+                            playerCards = playerCardsNext;
                             //print out scores
                             terminal.moveTo(31, 10);
                             System.out.println(player + ": " + playerScore);
@@ -118,10 +121,9 @@ public class Game {
                             terminal.moveTo(20, 10);
                             System.out.println("It's a Push. You get back " + playerBet + " coins.");
                             playerMoney += playerBet;
-                        }
-                        else if (21 - dealerScore < 21 - playerScore) {
+                        } else if (21 - dealerScore < 21 - playerScore) {
                             terminal.moveTo(20, 10);
-                            System.out.println("Dealer won. You lost your bet.");
+                            System.out.println("Dealer closer to 21. You lost your bet.");
                         } else {
                             prize = playerBet * 2;
                             terminal.moveTo(20, 10);
@@ -140,7 +142,7 @@ public class Game {
                             //PLAYER BUST
                             if (playerScore > 21) {
                                 terminal.moveTo(20, 10);
-                                System.out.println("Dealer won. You lost your bet.");
+                                System.out.println("You went over 21. Dealer won, You lost your bet.");
                             }
                             //DEALER BUST
                             else {
@@ -177,9 +179,9 @@ public class Game {
                 continue;
             }
         }
-            //player has no more money
-            terminal.moveTo(20, 10);
-            System.out.println("Sorry, you have no more money.");
-            playerMove.close();
+        //player has no more money
+        terminal.moveTo(20, 10);
+        System.out.println("Sorry, you have no more money.");
+        playerMove.close();
     }
 }
