@@ -97,7 +97,7 @@ public class Game {
         //player has no more money
         System.out.println("Sorry, you have no more money.");
         playerMove.close();
-
+        //end of game
 
     }
 }
