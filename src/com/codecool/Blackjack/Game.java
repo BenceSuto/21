@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.Scanner;
+
 import com.codecool.termlib.*;
 
 public class Game {
@@ -68,6 +69,10 @@ public class Game {
                         playerScore += playerCardsSecond[2].value;
                         //print out cards
                         System.out.println("Player: " + playerCardsSecond[0] + ", " + playerCardsSecond[1] + ", " + playerCardsSecond[2]);
+
+                        //print out scores
+                        System.out.println("Player: " + playerScore);
+                    } else if (nextMove == 's') {
                         if (dealerScore <= 16) {
                             Cards[] dealerCardsSecond = Arrays.copyOf(dealerCards, 3);
                             dealerCardsSecond[2] = deck.getCard();
@@ -79,10 +84,6 @@ public class Game {
                             //print out cards
                             System.out.println("Dealer: " + dealerCardsSecond[0] + ", " + dealerCardsSecond[1]);
                         }
-                        //print out scores
-                        System.out.println("Player: " + playerScore);
-                    } else if (nextMove == 's') {
-                        break;
                     }
                     if (dealerScore >= 21 || playerScore >= 21) {
                         if (dealerScore - 21 < playerScore - 21) {
@@ -93,8 +94,8 @@ public class Game {
                         System.out.println("Would you like to play again? (y/n)");
                         char playAgain = playerMove.next().charAt(0);
                         if (playAgain == 'y') {
-			    playerScore = 0;
-        		    dealerScore = 0;
+                            playerScore = 0;
+                            dealerScore = 0;
                             break;
                         } else {
                             System.exit(0);
