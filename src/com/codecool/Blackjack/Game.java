@@ -105,6 +105,11 @@ public class Game {
                         //print out scores
                         terminal.moveTo(31, 90);
                         System.out.println("Dealer: " + dealerScore);
+                        terminal.moveTo(30, 10);
+                        System.out.println(player + ": " + Arrays.toString(playerCards).replace("[", "").replace("]", ""));
+                        //print out scores
+                        terminal.moveTo(31, 10);
+                        System.out.println(player + ": " + playerScore);
                     } else {
                         Cards[] dealerCardsSecond = dealerCards;
                         //print out dealer cards
@@ -113,6 +118,11 @@ public class Game {
                         //print out scores
                         terminal.moveTo(31, 90);
                         System.out.println("Dealer: " + dealerScore);
+                        terminal.moveTo(30, 10);
+                        System.out.println(player + ": " + Arrays.toString(playerCards).replace("[", "").replace("]", ""));
+                        //print out scores
+                        terminal.moveTo(31, 10);
+                        System.out.println(player + ": " + playerScore);
                     }
 
                     //checking points
