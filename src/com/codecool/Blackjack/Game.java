@@ -14,9 +14,9 @@ public class Game {
         int playerBet = 0;
         String player;
         Scanner playerMove = new Scanner(System.in);
-        terminal.moveTo(10, 20);
+        terminal.moveTo(5, 10);
         System.out.println("Enter your name: ");
-        terminal.moveTo(11, 20);
+        terminal.moveTo(6, 10);
         player = input.nextLine();
         terminal.clearScreen();
         Deck deck = new Deck();
@@ -50,14 +50,16 @@ public class Game {
                     dealerScore += dealerCards[i].value;
                 }
                 //print out cards
-                terminal.moveTo(60, 20);
-                System.out.println("Player: " + playerCards[0] + ", " + playerCards[1]);
-                terminal.moveTo(60, 170);
-                System.out.println("Dealer: " + dealerCards[0] + ", [hidden]");
+                terminal.moveTo(30, 10);
+                System.out.print("Player: " + playerCards[0] + ", " + playerCards[1]);
+                terminal.moveTo(30, 100);
+                System.out.print("Dealer: " + dealerCards[0] + ", [hidden]");
                 //print out scores
+                terminal.moveTo(31, 10);
                 System.out.println("Player: " + playerScore);
 
                 while (dealerScore <= 21 && playerScore <= 21) {
+                    terminal.moveTo(20, 10);
                     System.out.println("What's your next move? ('h' for hit, 's' for stand)");
                     char nextMove = playerMove.next().charAt(0);
                     if (nextMove == 'h') {

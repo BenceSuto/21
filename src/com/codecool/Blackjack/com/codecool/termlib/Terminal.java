@@ -123,4 +123,12 @@ public class Terminal {
      */
     private void command(String commandString) {
     }
+
+    public void autoInput() {
+
+    }
+
+    public void autoEnter() {
+
+    }
 }
