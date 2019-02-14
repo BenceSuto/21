@@ -53,12 +53,12 @@ public class Game {
                 }
                 //print out cards
                 terminal.moveTo(30, 10);
-                System.out.print("Player: " + playerCards[0] + ", " + playerCards[1]);
+                System.out.print(player + ": " + Arrays.toString(playerCards).replace("[", "").replace("]", ""));
                 terminal.moveTo(30, 90);
                 System.out.print("Dealer: " + dealerCards[0] + ", [hidden]");
                 //print out scores
                 terminal.moveTo(31, 10);
-                System.out.println("Player: " + playerScore);
+                System.out.println(player + ": " + playerScore);
                 //BLACKJACK
                 if (playerScore == 21 && dealerScore != 21) {
                     prize = playerBet + (playerBet / 2);
@@ -72,15 +72,15 @@ public class Game {
                         terminal.clearScreen();
                         //player moves first
                         if (nextMove == 'h') {
-                            Cards[] playerCardsSecond = Arrays.copyOf(playerCards, 3);
-                            playerCardsSecond[2] = deck.getCard();
-                            playerScore += playerCardsSecond[2].value;
+                            Cards[] playerCardsNext = Arrays.copyOf(playerCards, playerCards.length + 1);
+                            playerCardsNext[playerCards.length] = deck.getCard();
+                            playerScore += playerCardsNext[playerCards.length].value;
                             //print out cards
                             terminal.moveTo(30, 10);
-                            System.out.println("Player: " + playerCardsSecond[0] + ", " + playerCardsSecond[1] + ", " + playerCardsSecond[2]);
+                            System.out.println(player + ": " + Arrays.toString(playerCards).replace("[", "").replace("]", ""));
                             //print out scores
                             terminal.moveTo(31, 10);
-                            System.out.println("Player: " + playerScore);
+                            System.out.println(player + ": " + playerScore);
                             //print out dealer cards
                             terminal.moveTo(30, 90);
                             System.out.print("Dealer: " + dealerCards[0] + ", [hidden]");
@@ -95,13 +95,13 @@ public class Game {
                         dealerCardsSecond[2] = deck.getCard();
                         dealerScore += dealerCardsSecond[2].value;
                         //print out dealer cards
-                        System.out.println("Dealer: " + dealerCardsSecond[0] + ", " + dealerCardsSecond[1] + ", " + dealerCardsSecond[2]);
+                        System.out.println("Dealer: " + Arrays.toString(dealerCardsSecond).replace("[", "").replace("]", ""));
                         //print out scores
                         System.out.println("Dealer: " + dealerScore);
                     } else {
                         Cards[] dealerCardsSecond = dealerCards;
                         //print out dealer cards
-                        System.out.println("Dealer: " + dealerCardsSecond[0] + ", " + dealerCardsSecond[1]);
+                        System.out.println("Dealer: " + Arrays.toString(dealerCardsSecond).replace("[", "").replace("]", ""));
                         //print out scores
                         System.out.println("Dealer: " + dealerScore);
                     }
@@ -111,8 +111,7 @@ public class Game {
                         if (dealerScore == playerScore) {
                             System.out.println("It's a Push. You get back " + playerBet + " coins.");
                             playerMoney += playerBet;
-                        }
-                        else if (21 - dealerScore < 21 - playerScore) {
+                        } else if (21 - dealerScore < 21 - playerScore) {
                             System.out.println("Dealer won. You lost your bet.");
                         } else {
                             prize = playerBet * 2;
@@ -165,9 +164,9 @@ public class Game {
                 continue;
             }
         }
-            //player has no more money
-            terminal.moveTo(10, 20);
-            System.out.println("Sorry, you have no more money.");
-            playerMove.close();
+        //player has no more money
+        terminal.moveTo(10, 20);
+        System.out.println("Sorry, you have no more money.");
+        playerMove.close();
     }
 }
