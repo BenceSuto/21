@@ -59,11 +59,11 @@ public class Game {
                             dealerCardsSecond[2] = deck.getCard();
                             dealerScore += dealerCardsSecond[2].value;
                             //print out cards
-                            System.out.println("Dealer: " + dealerCardsSecond[0] + ", [hidden], [hidden]");
+                            System.out.println("Dealer: " + dealerCardsSecond[0] + ", " + dealerCardsSecond[1] + ", " + dealerCardsSecond[2]);
                         } else {
                             Cards[] dealerCardsSecond = dealerCards;
                             //print out cards
-                            System.out.println("Dealer: " + dealerCardsSecond[0] + ", [hidden]");
+                            System.out.println("Dealer: " + dealerCardsSecond[0] + ", " + dealerCardsSecond[1]);
                         }
                         //print out scores
                         System.out.println("Player: " + playerScore);
@@ -97,7 +97,7 @@ public class Game {
         //player has no more money
         System.out.println("Sorry, you have no more money.");
         playerMove.close();
-        //end of game
+
 
     }
 }

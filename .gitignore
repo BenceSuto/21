@@ -18,9 +18,9 @@
 *.zip
 *.tar.gz
 *.rar
+
 *.iml
 *.xml
-
 *.misc.xml
 *.workspace.xml
 *.idea
