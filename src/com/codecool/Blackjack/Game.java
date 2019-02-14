@@ -54,7 +54,7 @@ public class Game {
                 //print out cards
                 terminal.moveTo(30, 10);
                 System.out.print("Player: " + playerCards[0] + ", " + playerCards[1]);
-                terminal.moveTo(30, 100);
+                terminal.moveTo(30, 90);
                 System.out.print("Dealer: " + dealerCards[0] + ", [hidden]");
                 //print out scores
                 terminal.moveTo(31, 10);
@@ -70,15 +70,21 @@ public class Game {
                         terminal.moveTo(20, 10);
                         System.out.println("What's your next move? ('h' for hit, 's' for stand)");
                         char nextMove = playerMove.next().charAt(0);
+                        terminal.clearScreen();
                         //player moves first
                         if (nextMove == 'h') {
                             Cards[] playerCardsSecond = Arrays.copyOf(playerCards, 3);
                             playerCardsSecond[2] = deck.getCard();
                             playerScore += playerCardsSecond[2].value;
                             //print out cards
+                            terminal.moveTo(30, 10);
                             System.out.println("Player: " + playerCardsSecond[0] + ", " + playerCardsSecond[1] + ", " + playerCardsSecond[2]);
                             //print out scores
+                            terminal.moveTo(31, 10);
                             System.out.println("Player: " + playerScore);
+                            //print out dealer cards
+                            terminal.moveTo(30, 90);
+                            System.out.print("Dealer: " + dealerCards[0] + ", [hidden]");
                             //player stands
                         } else if (nextMove == 's') {
                             if (dealerScore <= 16) {
@@ -86,10 +92,12 @@ public class Game {
                                 dealerCardsSecond[2] = deck.getCard();
                                 dealerScore += dealerCardsSecond[2].value;
                                 //print out cards
+                                terminal.moveTo(30, 90);
                                 System.out.println("Dealer: " + dealerCardsSecond[0] + ", " + dealerCardsSecond[1] + ", " + dealerCardsSecond[2]);
                             } else {
                                 Cards[] dealerCardsSecond = dealerCards;
                                 //print out cards
+                                terminal.moveTo(30, 90);
                                 System.out.println("Dealer: " + dealerCardsSecond[0] + ", " + dealerCardsSecond[1]);
                             }
 
@@ -98,25 +106,30 @@ public class Game {
                     if (dealerScore >= 21 || playerScore >= 21) {
                         //PUSH
                         if (dealerScore == playerScore) {
+                            terminal.moveTo(20, 10);
                             System.out.println("It's a Push. You get back " + playerBet + " coins.");
                         }
                         //BUST
                         else if (playerScore > 21 || dealerScore > 21) {
                             //PLAYER BUST
                             if (playerScore > 21) {
+                                terminal.moveTo(20, 10);
                                 System.out.println("Dealer won. You lost your bet.");
                             }
                             //DEALER BUST
                             else {
                                 prize = playerBet * 2;
+                                terminal.moveTo(20, 10);
                                 System.out.println("You won " + prize + " coins!");
                             }
                         }
                         //PLAYER WINS
                         else {
                             prize = playerBet * 2;
+                            terminal.moveTo(20, 10);
                             System.out.println("You won " + prize + " coins!");
                         }
+                        terminal.moveTo(20, 10);
                         System.out.println("Would you like to play again? (y/n)");
                         char playAgain = playerMove.next().charAt(0);
                         if (playAgain == 'y') {
@@ -128,9 +141,11 @@ public class Game {
                         }
                     } else {
                         if (dealerScore - 21 < playerScore - 21) {
+                            terminal.moveTo(20, 10);
                             System.out.println("Dealer won. You lost your bet.");
                         } else {
                             prize = playerBet * 2;
+                            terminal.moveTo(20, 10);
                             System.out.println("You won " + prize + " coins!");
                         }
                     }
