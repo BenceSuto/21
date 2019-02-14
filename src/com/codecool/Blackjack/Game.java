@@ -168,6 +168,8 @@ public class Game {
                 if (playAgain == 'y') {
                     playerScore = 0;
                     dealerScore = 0;
+                    dealerCards = new Cards[2];
+                    playerCards = new Cards[2];
                     terminal.clearScreen();
                     continue;
                 } else {
