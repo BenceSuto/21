@@ -4,6 +4,6 @@ public class Main {
         //game starts here
         Game game = new Game();
         System.out.println("Welcome to BlackJack!");
-        game.main();
+        game.start();
         }
 }

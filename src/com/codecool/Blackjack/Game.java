@@ -3,11 +3,9 @@ import java.util.Scanner;
 
 import com.codecool.termlib.*;
 
-import javax.smartcardio.Card;
-
 public class Game {
 
-    private  Terminal terminal = new Terminal();
+    private Terminal terminal = new Terminal();
     private Deck deck = new Deck();
 
     private String player;
@@ -18,7 +16,10 @@ public class Game {
     private Cards[] dealerCards = new Cards[2];
     private Cards[] playerCards = new Cards[2];
 
-    public void main() {
+    /**
+     * starts the game
+     */
+    public void start() {
 
         Scanner input = new Scanner(System.in);
         int playerBet = 0;
@@ -83,6 +84,7 @@ public class Game {
                     playerCards = new Cards[2];
                     terminal.clearScreen();
                 } else {
+                    terminal.clearScreen();
                     System.exit(0);
                 }
             } else {
@@ -96,6 +98,10 @@ public class Game {
         playerMove.close();
     }
 
+    /**
+     * checking the points of both player and dealer
+     * @param playerBet
+     */
     private void checkingPoints(int playerBet) {
         int prize;
         if (dealerScore < 21 && playerScore < 21) {
@@ -144,6 +150,11 @@ public class Game {
         }
     }
 
+    /**
+     * getting the next move of the player (hit or stand)
+     * @param playerMove
+     * @return
+     */
     private char getNextMove(Scanner playerMove) {
         terminal.moveTo(20, 10);
         System.out.println("What's your next move? ('h' for hit, 's' for stand)");
@@ -153,16 +164,24 @@ public class Game {
         return nextMove;
     }
 
+    /**
+     * display the cards in hand and the scores in case the dealer stands
+     */
     private void dealerStands() {
         Cards[] dealerCardsSecond = dealerCards;
         //print out dealer cards
+        terminal.clearScreen();
         terminal.moveTo(30, 90);
         System.out.println("Dealer: " + dealerCardsSecond[0] + ", " + dealerCardsSecond[1]);
         //print out scores
         terminal.moveTo(31, 90);
         System.out.println("Dealer: " + dealerScore);
+        diplayPlayerCardsAndScores();
     }
 
+    /**
+     * displays the cards in hand and the scores in case the dealer hits
+     */
     private void dealerHits() {
         Cards[] dealerCardsSecond = Arrays.copyOf(dealerCards, 3);
         dealerCardsSecond[2] = deck.getCard();
@@ -173,12 +192,12 @@ public class Game {
         //print out scores
         terminal.moveTo(31, 90);
         System.out.println("Dealer: " + dealerScore);
-        terminal.moveTo(30, 10);
-        System.out.println(player + ": " + Arrays.toString(playerCards).replace("[", "").replace("]", ""));
-        terminal.moveTo(31, 10);
-        System.out.println(player + ": " + playerScore);
+        diplayPlayerCardsAndScores();
     }
 
+    /**
+     * counts score and display cards of player in case the player hits
+     */
     private void playerHits() {
         Cards[] playerCardsNext = Arrays.copyOf(playerCards, playerCards.length + 1);
         Cards newCard = deck.getCard();
@@ -186,29 +205,45 @@ public class Game {
         playerScore += newCard.value;
         //print out cards
         playerCards = playerCardsNext;
+        diplayPlayerCardsAndScores();
+    }
+
+    /**
+     * displays the player's current cards and score
+     */
+    private void diplayPlayerCardsAndScores() {
         terminal.moveTo(30, 10);
         System.out.println(player + ": " + Arrays.toString(playerCards).replace("[", "").replace("]", ""));
         terminal.moveTo(31, 10);
         System.out.println(player + ": " + playerScore);
     }
 
+    /**
+     * handles the instant blackjack situation with calculating the player's prize
+     * and adding the prize to the player's money
+     * @param playerBet
+     */
     private void itIsBlackJack(int playerBet) {
         int prize = playerBet + (playerBet / 2);
         terminal.moveTo(10, 10);
-        System.out.println("It's BlackJack! You won " + playerBet/2 + " coins!");
+        System.out.println("It's BlackJack! You won " + playerBet / 2 + " coins!");
         playerMoney += prize;
     }
 
+    /**
+     * displays current cards and scores of the game
+     */
     private void printState() {
-        terminal.moveTo(30, 10);
-        System.out.print(player + ": " + Arrays.toString(playerCards).replace("[", "").replace("]", ""));
         terminal.moveTo(30, 90);
         System.out.print("Dealer: " + dealerCards[0] + ", [hidden]");
-        //print out scores
-        terminal.moveTo(31, 10);
-        System.out.println(player + ": " + playerScore);
+        diplayPlayerCardsAndScores();
     }
 
+    /**
+     * handles the new bets of the player
+     * @param playerMove
+     * @return
+     */
     private int placeBet(Scanner playerMove) {
         int playerBet;
         terminal.moveTo(10, 20);
@@ -221,6 +256,12 @@ public class Game {
         return playerBet;
     }
 
+    /**
+     * calculates the score of the drown cards
+     * @param score
+     * @param cards
+     * @return
+     */
     private int getScore(int score, Cards[] cards) {
         for (int i = 0; i < cards.length; i++) {
             cards[i] = deck.getCard();
