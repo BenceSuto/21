@@ -17,6 +17,9 @@ enum Cards {Ace(1), Two(2), Three(3), Four(4), Five(5), Six(6), Seven(7), Eight(
     }
 }
 
+/**
+ * this class creates the deck for the game
+ */
 public class Deck {
 
     private static Cards [] cards = null;
@@ -28,13 +31,15 @@ public class Deck {
             cards[i++] = card;
     }
 
+    /**
+     * this class returns a random card from the deck
+     * @return it returns the drawn card
+     */
+
     public static Cards getCard(){
 
-        int result = 0;
         Random generator = new Random();
         Cards card = cards[generator.nextInt(cards.length)];
-
- 	result = card.value;
 
 	return card;
     }

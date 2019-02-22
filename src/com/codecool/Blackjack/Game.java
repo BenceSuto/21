@@ -3,6 +3,9 @@ import java.util.Scanner;
 
 import com.codecool.termlib.*;
 
+/**
+ * this class contains the main thread of the game itself
+ */
 public class Game {
 
     private Terminal terminal = new Terminal();
@@ -153,7 +156,7 @@ public class Game {
     /**
      * getting the next move of the player (hit or stand)
      * @param playerMove
-     * @return
+     * @return it returns a key according to the player's move
      */
     private char getNextMove(Scanner playerMove) {
         terminal.moveTo(20, 10);
@@ -242,7 +245,7 @@ public class Game {
     /**
      * handles the new bets of the player
      * @param playerMove
-     * @return
+     * @return it returns the amount of money the player bets in the current game
      */
     private int placeBet(Scanner playerMove) {
         int playerBet;
@@ -258,9 +261,9 @@ public class Game {
 
     /**
      * calculates the score of the drown cards
-     * @param score
-     * @param cards
-     * @return
+     * @param score the current score of the dealer or player
+     * @param cards the current cards in the hand of the dealer or player
+     * @return it returns the new score of the player or dealer
      */
     private int getScore(int score, Cards[] cards) {
         for (int i = 0; i < cards.length; i++) {
